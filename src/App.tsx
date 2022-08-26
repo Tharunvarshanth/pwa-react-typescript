@@ -5,6 +5,7 @@ import AuthApi from "./app/utilities/api/auth";
 import Amplify, { Auth, API } from "aws-amplify";
 import AmazonCognitoIdentity from "amazon-cognito-identity-js";
 import AWS, { CognitoIdentityServiceProvider } from "aws-sdk";
+import { Config } from "./environments/config";
 
 Amplify.configure({
   aws_cognito_region: "ap-south-1",
@@ -17,7 +18,7 @@ function App() {
   let userSession: any;
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_ENV);
+    console.log(Config.env);
     /*
     Auth.currentSession().then((res) => {
       let accessToken = res.getAccessToken();
