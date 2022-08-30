@@ -1,29 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import QrReader from "react-qr-scanner";
 import { isMobile } from "react-device-detect";
 
-class ReactQrScanner extends Component {
-  qrRef = React.createRef(null);
-  ref = React.createRef(null);
-  constructor(props) {
-    console.log(isMobile);
-    super(props);
-    this.state = {
-      delay: 100,
-      result: "No result",
-      isHasCameraAccess: true,
-    };
-
-    this.handleScan = this.handleScan.bind(this);
-  }
-  handleScan(data) {
+function ReactQrScanner() {
+  useEffect(() => {});
+  function handleScan(data) {
     // console.log("handleScann");
-    // console.log(data);
-    this.setState({
-      result: data,
-    });
   }
-  handleError(err) {
+  function handleError(err) {
     if (err === "DOMException: Permission denied") {
       this.setState({
         ...this.state,
@@ -33,36 +17,40 @@ class ReactQrScanner extends Component {
     console.log("handleError ", err);
   }
 
-  handleImageLoad(img) {
+  function handleImageLoad(img) {
     console.log(img);
   }
-  handleLoad(res) {
+  function handleLoad(res) {
     console.log("onLoad", res);
   }
-  onScanFile = () => {
+  function onScanFile() {
     console.log(this.qrRef);
     this.qrRef.openImageDialog();
+  }
+
+  const previewStyle = {
+    height: "40vh",
+    width: "80%",
   };
 
-  componentDidMount() {}
-
-  render() {
-    const previewStyle = {
-      height: "40vh",
-      width: "80%",
-    };
-
-    return (
-      <div ref={this.ref}>
-        <QrReader
-          facingmode="environment"
-          delay={this.state.delay}
-          style={previewStyle}
-          onError={this.handleError}
-          onScan={this.handleScan}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <QrReader
+        constraints={
+          window.screen.width > 768
+            ? undefined
+            : {
+                video: {
+                  facingMode: { exact: `environment` },
+                },
+              }
+        }
+        delay={300}
+        style={previewStyle}
+        onError={handleError}
+        onScan={handleScan}
+      />
+    </div>
+  );
 }
 export default ReactQrScanner;

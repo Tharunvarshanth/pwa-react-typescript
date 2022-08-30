@@ -8,6 +8,7 @@ import ReactQrScanner from "./app/components/ReactQrScanner";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Menu from "./app/components/pages/Menu";
 import Login from "./app/components/pages/Login";
+import LegacyModeExample from "./app/components/pages/LegacyMode";
 
 Amplify.configure({
   aws_cognito_region: "ap-south-1",
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <div className="App">
+      <ReactQrScanner />
       {/*
         <Route path="/" element={<Menu />}>
 

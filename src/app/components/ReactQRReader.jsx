@@ -31,19 +31,17 @@ function ReactQrLibReader() {
       <div ref={ref}>
         <button onClick={onScanFile}>Scan Qr Code</button>
         <QrReader
-          ref={qrRef}
-          delay={300}
-          style={{ width: "100%" }}
-          onError={handleErrorFile}
-          onScan={handleScanFile}
-          legacyMode
+          onResult={(result, error) => {
+            if (!!result) {
+              console.log(result);
+            }
+
+            if (!!error) {
+              console.info("error", error);
+            }
+          }}
+          style={{ width: 150, height: 150 }}
         />
-        <h3>Scanned Code: {scanResultFile}</h3>
-      </div>
-      <div false>
-        <h3>Qr Code Scan by Web Cam</h3>
-        <QrReader delay={300} style={{ width: "100%" }} onError={handleErrorWebCam} onScan={handleScanWebCam} />
-        <h3>Scanned By WebCam Code: {scanResultWebCam}</h3>
       </div>
     </>
   );
