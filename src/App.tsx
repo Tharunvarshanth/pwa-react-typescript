@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import AuthApi from "./app/utilities/api/auth";
 import Amplify, { Auth, API } from "aws-amplify";
-import AmazonCognitoIdentity from "amazon-cognito-identity-js";
-import AWS, { CognitoIdentityServiceProvider } from "aws-sdk";
 import { Config } from "./environments/config";
+import ReactQrLibReader from "./app/components/ReactQRReader";
+import ReactQrScanner from "./app/components/ReactQrScanner";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Menu from "./app/components/pages/Menu";
+import Login from "./app/components/pages/Login";
 
 Amplify.configure({
   aws_cognito_region: "ap-south-1",
@@ -55,11 +57,19 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Tharun PWA App</p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
+      {/*
+        <Route path="/" element={<Menu />}>
+
+          <Route path="login" element={<Login />} />
+
+
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Route>
+      </Routes>
+   */}
+      {/*<ReactQrScanner />
         <button onClick={onFirstTimeSignUp}>First Signup</button>
         <button onClick={handleChangePassword}>Set First Time Password</button>
         <button onClick={currentUser}>Current User</button>
@@ -67,7 +77,7 @@ function App() {
         <button onClick={logout}>Forgotpassword</button>
         <button onClick={rememberDevice}>Remember</button>
         <button onClick={forgotDevice}>Forgot Device</button>
-      </header>
+  */}
     </div>
   );
 }
