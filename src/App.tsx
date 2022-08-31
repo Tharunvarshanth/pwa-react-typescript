@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./App.css";
+import "./App.scss";
 import AuthApi from "./app/utilities/api/auth";
 import Amplify, { Auth, API } from "aws-amplify";
 import { Config } from "./environments/config";
@@ -9,6 +9,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Menu from "./app/components/pages/Menu";
 import Login from "./app/components/pages/Login";
 import LegacyModeExample from "./app/components/pages/LegacyMode";
+import Home from "./app/components/pages/Home";
+import RequireAuth from "./app/helpers/RequireAuth";
+import { PrivateRoute } from "./app/helpers/PrivateRoute";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
 
 Amplify.configure({
   aws_cognito_region: "ap-south-1",
@@ -58,20 +62,22 @@ function App() {
 
   return (
     <div className="App">
-      <ReactQrScanner />
-      {/*
-        <Route path="/" element={<Menu />}>
-
-          <Route path="login" element={<Login />} />
-
-
-          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-            <Route path="/" element={<Home />} />
+      <ThemeProvider breakpoints={["xl", "lg", "md", "sm", "xs"]} minBreakpoint="xs">
+        <Routes>
+          <Route path="/" element={<Menu />}>
+            <Route path="login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute permission={["view"]}>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
           </Route>
-        </Route>
-      </Routes>
-   */}
-      {/*<ReactQrScanner />
+        </Routes>
+
+        {/*<ReactQrScanner />
         <button onClick={onFirstTimeSignUp}>First Signup</button>
         <button onClick={handleChangePassword}>Set First Time Password</button>
         <button onClick={currentUser}>Current User</button>
@@ -80,6 +86,7 @@ function App() {
         <button onClick={rememberDevice}>Remember</button>
         <button onClick={forgotDevice}>Forgot Device</button>
   */}
+      </ThemeProvider>
     </div>
   );
 }
