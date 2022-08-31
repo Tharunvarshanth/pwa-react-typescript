@@ -59,7 +59,8 @@ function App() {
   async function forgotDevice() {
     authController.current.forgotDevice();
   }
-
+  //
+  //https://www.robinwieruch.de/react-router-private-routes/
   return (
     <div className="App">
       <ThemeProvider breakpoints={["xl", "lg", "md", "sm", "xs"]} minBreakpoint="xs">
