@@ -49,6 +49,9 @@ function App() {
   function currentUser() {
     authController.current.currentUser();
   }
+  function forgotPassword() {
+    authController.current.forgotPassword("+940768407950");
+  }
 
   async function logout() {
     await authController.current.signOut();
@@ -59,10 +62,15 @@ function App() {
   async function forgotDevice() {
     authController.current.forgotDevice();
   }
+
+  async function reInvite() {
+    authController.current.reinvite("+940768407950");
+  }
   //
   //https://www.robinwieruch.de/react-router-private-routes/
   return (
     <div className="App">
+      {/*
       <ThemeProvider breakpoints={["xl", "lg", "md", "sm", "xs"]} minBreakpoint="xs">
         <Routes>
           <Route path="/" element={<Menu />}>
@@ -77,17 +85,18 @@ function App() {
             />
           </Route>
         </Routes>
+          </ThemeProvider>
+        <ReactQrScanner />
+        */}
 
-        {/*<ReactQrScanner />
-        <button onClick={onFirstTimeSignUp}>First Signup</button>
-        <button onClick={handleChangePassword}>Set First Time Password</button>
-        <button onClick={currentUser}>Current User</button>
-        <button onClick={logout}>Logout</button>
-        <button onClick={logout}>Forgotpassword</button>
-        <button onClick={rememberDevice}>Remember</button>
-        <button onClick={forgotDevice}>Forgot Device</button>
-  */}
-      </ThemeProvider>
+      <button onClick={onFirstTimeSignUp}>First Signup</button>
+      <button onClick={handleChangePassword}>Set First Time Password</button>
+      <button onClick={currentUser}>Current User</button>
+      <button onClick={logout}>Logout</button>
+      <button onClick={forgotPassword}>Forgotpassword</button>
+      <button onClick={rememberDevice}>Remember</button>
+      <button onClick={forgotDevice}>Forgot Device</button>
+      <button onClick={reInvite}>Re Invite</button>
     </div>
   );
 }

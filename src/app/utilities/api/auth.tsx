@@ -68,6 +68,14 @@ class AuthApi {
       console.log("error signing out: ", error);
     }
   }
+  async reinvite(username: string) {
+    try {
+      const result = Auth.resendSignUp(username);
+      console.log(result);
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
 
   async signIn() {}
 }
